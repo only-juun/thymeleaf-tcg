@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 목록</title>
+    <link th:href="@{/styles/loadMemberList.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <div class="search-container">
+            <label for="name">이름: </label>
+            <input type="text" id="name"/>
+            <label for="level">레벨: </label>
+            <select id="level">
+                <option value="">옵션 없음</option>
+                <option value="BRONZE">BRONZE</option>
+                <option value="SILVER">SILVER</option>
+                <option value="GOLD">GOLD</option>
+            </select>
+            <button class="search-button" onclick="search()">검색</button>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="buttons-container">
+        <button class="register-button" onclick="moveToRegisterForm()">회원 등록</button>
+    </div>
+    <div id="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>가입일자</th>
+                <th>레벨</th>
+                <th>카드갯수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${memberList}">
+                <td th:text="${member.memberId}"></td>
+                <td><a th:href="@{'/members/' + ${member.memberId}}" th:text="${member.name}"></a></td>
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.joinDate}"></td>
+                <td th:text="${member.level}"></td>
+                <td th:text="${member.cardCount}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/javascript/loadMemberList.js"></script>
+</html>

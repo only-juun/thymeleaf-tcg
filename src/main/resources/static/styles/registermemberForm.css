@@ -1,0 +1,50 @@
+.member_form-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.member_form-container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.member_form-container input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.member_form-container button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.member_form-container #submit {
+    background-color: #6056DB;
+}
+
+.member_form-container #cancel {
+    background-color: #BABABA;
+}
+
+/* 버튼 간격을 위한 추가 스타일 */
+.member_form-container button:first-child {
+    margin-right: 20px;
+}

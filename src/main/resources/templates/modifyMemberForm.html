@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 수정</title>
+    <link th:href="@{/styles/registerMemberForm.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div class="member_form-container">
+        <h1>회원 정보 수정</h1>
+
+        <form id="memberForm" th:action="@{/members/modify}" th:object="${memberModifyFormData}" method="POST">
+            <input type="hidden" id="memberId" th:field="*{memberId}" readonly/>
+
+            <label for="name">이름</label>
+            <input type="text" id="name" th:field="*{memberName}"/>
+            <p th:if="${#fields.hasErrors('memberName')}" th:errors="*{memberName}" class="error-message"></p>
+
+            <label for="email">이메일</label>
+            <input type="text" id="email" th:field="*{memberEmail}"/>
+            <p th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}" class="error-message"></p>
+
+            <label for="joinDate">가입날짜</label>
+            <input type="text" id="joinDate" th:field="*{joinDate}"/>
+            <p th:if="${#fields.hasErrors('joinDate')}" th:errors="*{joinDate}" class="error-message"></p>
+        </form>
+
+            <button id="cancel" th:onclick="|javascript:cancel(${memberModifyFormData.memberId})|">취소</button>
+            <button id="submit" type="submit" onclick="submit()">등록</button>
+    </div>
+</body>
+<script src="/javascript/modifyMemberForm.js"></script>
+</html>

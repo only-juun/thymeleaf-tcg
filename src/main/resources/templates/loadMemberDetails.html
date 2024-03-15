@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 조회</title>
+    <link th:href="@{/styles/loadMemberList.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <h1>회원 조회</h1>
+    <div class="member-details">
+        <div class="buttons-container">
+            <button id = "back" onclick="back()">돌아가기</button>
+            <button id = "modify" th:onclick="|javascript:modifyMember('${member.memberId}')|">수정</button>
+            <button id = "delete" th:onclick="|javascript:deleteMember('${member.memberId}')|">삭제</button>
+        </div>
+        <p><strong>ID:</strong> <span th:text="${member.memberId}"></span></p>
+        <p><strong>이름:</strong> <span th:text="${member.memberName}"></span></p>
+        <p><strong>이메일:</strong> <span th:text="${member.memberEmail}"></span></p>
+        <p><strong>가입일자:</strong> <span th:text="${member.joinDate}"></span></p>
+        <p><strong>레벨:</strong> <span th:text="${member.level}"></span></p>
+        <p><strong>카드갯수:</strong> <span th:text="${member.cardCount}"></span></p>
+        <p><strong>카드금액:</strong> <span th:text="${member.cardTotalPrice}"></span></p>
+    </div>
+</div>
+<div class="container">
+    <h2>소유 게임 카드</h2>
+    <div class="card-details">
+        <div class="buttons-container">
+            <button id = "add" th:onclick="|javascript:addCard('${member.memberId}')|">카드 추가</button>
+        </div>
+        <div id="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>게임 종류</th>
+                    <th>타이틀</th>
+                    <th>일련번호</th>
+                    <th>가격</th>
+                    <th>삭제</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="card : ${cardList}">
+                    <td th:text="${card.cardId}"></td>
+                    <td th:text="${card.game}"></td>
+                    <td th:text="${card.title}"></td>
+                    <td th:text="${card.serialNumber}"></td>
+                    <td th:text="${card.price}"></td>
+                    <td><a href="#" th:onclick="|javascript:deleteCard('${card.cardId}', '${member.memberId}')|">[삭제]</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/javascript/memberDetails.js"></script>
+</html>

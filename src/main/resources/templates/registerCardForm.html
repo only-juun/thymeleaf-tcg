@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>카드 등록</title>
+    <link th:href="@{/styles/registerMemberForm.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="member_form-container">
+    <h1>카드 등록</h1>
+    <form id="cardForm" th:action="@{/cards/register}" th:object="${cardRegisterFormData}" method="POST">
+        <input type="hidden" id="memberId" th:field="*{memberId}"/>
+
+        <label for="game">게임</label>
+        <select id="game" th:field="*{game}">
+            <option th:each="gameName : ${gameList}" th:value="${gameName}" th:text="${gameName}"></option>
+        </select>
+        <p th:if="${#fields.hasErrors('game')}" th:errors="*{game}" class="error-message"></p>
+
+        <label for="title">타이틀</label>
+        <input type="text" id="title" th:field="*{title}"/>
+        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></p>
+
+        <label for="serialNumber">일련번호</label>
+        <input type="text" id="serialNumber" th:field="*{serialNumber}"/>
+        <p th:if="${#fields.hasErrors('serialNumber')}" th:errors="*{serialNumber}" class="error-message"></p>
+
+        <label for="price">가격</label>
+        <input type="text" id="price" th:field="*{price}"/>
+        <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error-message"></p>
+    </form>
+    <button id="cancel" th:onclick="|javascript:cancel(${cardRegisterFormData.memberId})|">취소</button>
+    <button id="submit" type="submit" onclick="submit()">등록</button>
+</div>
+</body>
+<script src="/javascript/registerCardForm.js"></script>
+</html>
